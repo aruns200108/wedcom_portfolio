@@ -1,186 +1,208 @@
 
 
-// "use client";
-
-// import { motion } from "framer-motion";
-
-// export default function Hero() {
-//   return (
-//     <section className="relative min-h-screen overflow-hidden bg-[#f5f5f4] text-[#1c1917]">
-
-//       {/* Background Image */}
-//       <div
-//         className="absolute inset-0 scale-105 bg-cover bg-center opacity-30"
-//         style={{
-//           backgroundImage:
-//             "url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')",
-//         }}
-//       />
-
-//       {/* Smoke Overlay */}
-//       <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-[#f5f5f4]/60 to-[#f5f5f4]" />
-
-//       {/* Floating Blur */}
-//       <div className="absolute -left-20 top-20 h-[400px] w-[400px] rounded-full bg-white/40 blur-3xl" />
-
-//       <div className="absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-[#e7e5e4]/50 blur-3xl" />
-
-//       {/* Main Content */}
-//       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-
-//         <motion.p
-//           initial={{ opacity: 0, y: 30 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 1 }}
-//           className="mb-6 text-sm uppercase tracking-[0.5em] text-[#78716c]"
-//         >
-//           Luxury Wedding Photography
-//         </motion.p>
-
-//         <motion.h1
-//           initial={{ opacity: 0, y: 80 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 1.2 }}
-//           className="max-w-6xl text-5xl font-semibold leading-tight sm:text-6xl md:text-8xl lg:text-[120px]"
-//         >
-//           Elegant
-//           <br />
-//           Moments
-//         </motion.h1>
-
-//         <motion.p
-//           initial={{ opacity: 0, y: 40 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ delay: 0.3, duration: 1 }}
-//           className="mt-8 max-w-2xl text-lg leading-9 text-[#57534e]"
-//         >
-//           Capturing timeless love stories with cinematic elegance,
-//           emotional storytelling, and luxurious visual artistry.
-//         </motion.p>
-
-//         {/* Buttons */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 40 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ delay: 0.5, duration: 1 }}
-//           className="mt-10 flex flex-col gap-4 sm:flex-row"
-//         >
-//           <button className="bg-[#1c1917] px-8 py-4 text-sm tracking-[0.25em] text-white transition hover:opacity-90">
-//             VIEW PORTFOLIO
-//           </button>
-
-//           <button className="border border-[#1c1917] px-8 py-4 text-sm tracking-[0.25em] transition hover:bg-[#1c1917] hover:text-white">
-//             BOOK SESSION
-//           </button>
-//         </motion.div>
-
-//         {/* Scroll */}
-//         <motion.div
-//           animate={{ y: [0, 12, 0] }}
-//           transition={{
-//             duration: 1.5,
-//             repeat: Infinity,
-//           }}
-//           className="absolute bottom-10 flex flex-col items-center text-[#78716c]"
-//         >
-//           <span className="text-xs tracking-[0.4em]">
-//             SCROLL
-//           </span>
-
-//           <div className="mt-3 h-14 w-[1px] bg-[#a8a29e]" />
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// }
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
-  return (
-    <section className="relative min-h-screen overflow-hidden">
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-      {/* Background Image */}
+  const leftImageRef = useRef<HTMLDivElement>(null);
+  const rightImageRef = useRef<HTMLDivElement>(null);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+
+      // LEFT IMAGE PARALLAX
+      gsap.to(leftImageRef.current, {
+        x: -180,
+        y: 120,
+        rotate: -8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // RIGHT IMAGE PARALLAX
+      gsap.to(rightImageRef.current, {
+        x: 180,
+        y: -120,
+        rotate: 8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // CONTENT PARALLAX
+      gsap.to(contentRef.current, {
+        y: -80,
+        opacity: 0.3,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative min-h-[160vh] overflow-hidden bg-[#efe4d7]"
+    >
+
+      {/* BACKGROUND IMAGE */}
       <div
-        className="absolute inset-0 scale-105 bg-cover bg-center opacity-30"
+        className="absolute inset-[-5%] scale-105 bg-cover bg-center"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop')",
         }}
       />
 
-      {/* Smoke Blur */}
-      <div className="absolute left-0 top-10 h-[500px] w-[500px] rounded-full bg-white/60 blur-3xl" />
+      {/* SANDAL OVERLAY */}
+      <div className="absolute inset-0 bg-[#d8c7b5]/45 mix-blend-multiply" />
 
-      <div className="absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#d6d3d1]/50 blur-3xl" />
+      {/* CINEMATIC GRADIENT */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#f6eee6]/20 via-[#d9c8b6]/30 to-[#c6b29d]/70" />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-[#f8f7f5]/30 to-[#f8f7f5]" />
+      {/* GRAIN TEXTURE */}
+      <div className="absolute inset-0 opacity-[0.05] mix-blend-soft-light bg-[url('https://www.transparenttextures.com/patterns/asfalt-dark.png')]" />
 
-      {/* Content */}
-      <div className="relative z-10 flex min-h-screen flex-col justify-center px-6 lg:px-20">
+      {/* SMOKE BLUR */}
+      <div className="absolute left-[-10%] top-[0%] h-[700px] w-[700px] rounded-full bg-[#f3e7dc]/50 blur-3xl" />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="mb-6 text-sm uppercase tracking-[0.5em] text-[#78716c]"
+      <div className="absolute bottom-[-10%] right-[-10%] h-[700px] w-[700px] rounded-full bg-[#d6c2af]/40 blur-3xl" />
+
+      {/* STICKY HERO */}
+      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+
+        {/* LEFT IMAGE */}
+        <div
+          ref={leftImageRef}
+          className="absolute left-[5%] top-[18%] hidden overflow-hidden rounded-[40px] shadow-2xl lg:block"
         >
-          Editorial Wedding Photography
-        </motion.p>
+          <img
+            src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200"
+            alt=""
+            className="h-[500px] w-[360px] object-cover"
+          />
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2 }}
-          className="max-w-5xl text-6xl leading-none tracking-[-0.04em] text-[#1c1917] sm:text-7xl md:text-8xl lg:text-[140px]"
-        >
-          Timeless
-          <br />
-          Elegance
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 1 }}
-          className="mt-10 max-w-2xl text-lg leading-9 text-[#57534e]"
-        >
-          Capturing emotional moments through cinematic storytelling,
-          refined artistry, and luxurious editorial imagery.
-        </motion.p>
-
-        {/* Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-12 flex flex-col gap-5 sm:flex-row"
-        >
-          <button className="bg-[#1c1917] px-10 py-5 text-sm tracking-[0.3em] text-white transition hover:opacity-90">
-            VIEW STORIES
-          </button>
-
-          <button className="border border-[#1c1917] px-10 py-5 text-sm tracking-[0.3em] text-[#1c1917] transition hover:bg-[#1c1917] hover:text-white">
-            BOOK SESSION
-          </button>
-        </motion.div>
-
-        {/* Floating Editorial Card */}
-        <motion.div
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6, duration: 1 }}
-          className="absolute right-10 top-1/2 hidden -translate-y-1/2 overflow-hidden rounded-[40px] border border-white/30 bg-white/30 shadow-2xl backdrop-blur-xl lg:block"
+        {/* RIGHT IMAGE */}
+        <div
+          ref={rightImageRef}
+          className="absolute right-[5%] bottom-[10%] hidden overflow-hidden rounded-[40px] shadow-2xl lg:block"
         >
           <img
             src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200"
             alt=""
-            className="h-[500px] w-[380px] object-cover"
+            className="h-[500px] w-[360px] object-cover"
           />
-        </motion.div>
+        </div>
+
+        {/* CENTER CONTENT */}
+        <div
+          ref={contentRef}
+          className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 text-center"
+        >
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="mb-6 text-sm uppercase tracking-[0.6em] text-[#8b735f]"
+          >
+            Luxury Wedding Photography
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 80 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="max-w-6xl font-serif text-6xl font-light leading-none tracking-[-0.04em] text-[#2f241d] sm:text-7xl md:text-8xl lg:text-[140px]"
+          >
+            Timeless
+            <br />
+            Elegance
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="mt-10 max-w-2xl text-lg leading-9 text-[#4b3d32]"
+          >
+            Capturing emotional moments through cinematic storytelling,
+            refined artistry, and luxurious editorial imagery.
+          </motion.p>
+
+          {/* BUTTONS */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="mt-12 flex flex-col gap-5 sm:flex-row"
+          >
+            
+             <Link href="/gallery">
+
+  <button className="bg-[#2f241d] px-10 py-5 text-sm tracking-[0.3em] text-white transition hover:opacity-90">
+    VIEW STORIES
+  </button>
+
+</Link>
+            
+
+            <button className="border border-[#2f241d] px-10 py-5 text-sm tracking-[0.3em] text-[#2f241d] transition hover:bg-[#2f241d] hover:text-white">
+              BOOK SESSION
+            </button>
+          </motion.div>
+        </div>
       </div>
+
+      {/* NEXT SECTION */}
+      <section className="relative flex min-h-screen items-center justify-center bg-[#e8dccf] px-6">
+
+        <div className="max-w-5xl text-center">
+
+          <p className="mb-6 text-sm uppercase tracking-[0.6em] text-[#8b735f]">
+            Editorial Storytelling
+          </p>
+
+          <h2 className="font-serif text-5xl font-light leading-tight text-[#2f241d] md:text-8xl">
+            Every Frame
+            <br />
+            Feels Emotional
+          </h2>
+
+          <p className="mt-10 text-lg leading-9 text-[#4b3d32]">
+            We create cinematic wedding stories with timeless elegance,
+            immersive emotion, and luxury visual artistry.
+          </p>
+        </div>
+      </section>
     </section>
   );
 }

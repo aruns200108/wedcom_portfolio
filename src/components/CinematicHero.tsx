@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,10 +92,11 @@ export default function CinematicHero() {
             Luxury cinematic storytelling inspired by emotion,
             elegance, and modern editorial artistry.
           </p>
-
-          <button className="mt-12 border border-white px-10 py-5 text-sm tracking-[0.3em] transition hover:bg-white hover:text-black">
-            EXPLORE STORIES
-          </button>
+          <Link href="/gallery">
+            <button className="mt-12 border border-white px-10 py-5 text-sm tracking-[0.3em] transition hover:bg-white hover:text-black">
+              EXPLORE STORIES
+            </button>
+          </Link>
         </div>
       </div>
     </section>
