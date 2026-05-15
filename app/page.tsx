@@ -9,6 +9,7 @@ import NextSection from "@/src/components/NextSection";
 import ParallaxGallery from "@/src/components/ParallaxGallery";
 import ParallaxSection from "@/src/components/ParallaxSection";
 import Services from "@/src/components/Services";
+import TestimonialsPage from "@/src/components/Testimonials";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <ParallaxSection />
 
       <ParallaxGallery />
+      <TestimonialsPage />
 
       <Services />
 

@@ -1,33 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import img1 from "../../src/assets/image/img1.jpeg";
+import img2 from "../../src/assets/image/img2.jpeg";
+import img3 from "../../src/assets/image/img3.jpeg";
 const photos = [
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200",
-  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1200",
-  "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1200",
-  "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200",
-  "https://images.unsplash.com/photo-1513278974582-3e1b4a4fa21f?q=80&w=1200",
-  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1200",
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200",
-  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200",
-  "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200",
-  "https://images.unsplash.com/photo-1517365830460-955ce3ccd263?q=80&w=1200",
-  "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200",
-  "https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200",
-  "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200",
-  "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=1200",
-  "https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=1200",
-  "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?q=80&w=1200",
-  "https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?q=80&w=1200",
-  "https://images.unsplash.com/photo-1521119989659-a83eee488004?q=80&w=1200",
-  "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200",
-  "https://images.unsplash.com/photo-1516637090014-cb1ab0d08fc7?q=80&w=1200",
+  img1,
+  img2,
+  img3,
+ 
 ];
 
 export default function GalleryPage() {
@@ -102,7 +83,7 @@ export default function GalleryPage() {
               <div className="overflow-hidden rounded-[35px]">
 
                 <img
-                  src={photo}
+                  src={photo.src}
                   alt=""
                   className={`w-full object-cover transition duration-700 group-hover:scale-110 ${
                     index % 3 === 0

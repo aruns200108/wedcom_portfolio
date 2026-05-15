@@ -151,8 +151,7 @@ export default function ContactPage() {
                                     <div>
                                         <p className="text-sm uppercase tracking-[0.3em] text-black">
                                             Instagram
-                                        </p>se 
-                                        05
+                                        </p>
 
                                         <p className="mt-2 text-xl text-[#2f241d]">
                                             wedcom_stories

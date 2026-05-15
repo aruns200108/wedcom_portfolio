@@ -3,10 +3,14 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+
+import img1 from "../assets/image2/image1.jpeg";  
+import img3 from "../assets/image2/image2.jpeg";  
+import img2 from "../assets/image2/image3.jpeg";  
 const images = [
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200",
-  "https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200",
+  img1,
+  img2,
+  img3,
 ];
 
 export default function ParallaxGallery() {
@@ -71,7 +75,7 @@ export default function ParallaxGallery() {
               <div className="overflow-hidden rounded-[35px]">
 
                 <img
-                  src={img}
+                  src={img.src}
                   alt=""
                   className="h-[550px] w-full object-cover transition duration-700 group-hover:scale-110"
                 />
