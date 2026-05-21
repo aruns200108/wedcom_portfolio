@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header className="fixed left-0 top-0 z-50 w-full">
 
@@ -27,9 +30,13 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* MOBILE MENU */}
-        <button className="lg:hidden">
-          <Menu className="h-6 w-6 text-white" />
+        {/* MOBILE MENU TOGGLE */}
+        <button className="lg:hidden" onClick={() => setMenuOpen((prev) => !prev)}>
+          {menuOpen ? (
+            <X className="h-6 w-6 text-white" />
+          ) : (
+            <Menu className="h-6 w-6 text-white" />
+          )}
         </button>
 
         {/* CENTER BRAND */}
@@ -55,15 +62,48 @@ export default function Navbar() {
           </Link>
 
           {/* BOOK BUTTON */}
-          <Link href="/booking"
-
-             className="hidden rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] tracking-[0.25em] text-white backdrop-blur-xl transition duration-300 hover:bg-white hover:text-black sm:block lg:px-6 lg:py-3 lg:text-xs lg:tracking-[0.35em]">
-              BOOK
-           
-
-    </Link>
+          <Link
+            href="/booking"
+            className="hidden rounded-full border border-white/30 bg-white/10 px-4 py-2 text-[10px] tracking-[0.25em] text-white backdrop-blur-xl transition duration-300 hover:bg-white hover:text-black sm:block lg:px-6 lg:py-3 lg:text-xs lg:tracking-[0.35em]"
+          >
+            BOOK
+          </Link>
         </div>
       </div>
+
+      {/* MOBILE DROPDOWN MENU */}
+      {menuOpen && (
+        <nav className="flex flex-col items-center gap-6 bg-black/80 py-8 backdrop-blur-md lg:hidden">
+          <Link
+            href="/"
+            onClick={() => setMenuOpen(false)}
+            className="text-sm tracking-[0.35em] text-white/90 transition duration-300 hover:text-white"
+          >
+            HOME
+          </Link>
+          <Link
+            href="/gallery"
+            onClick={() => setMenuOpen(false)}
+            className="text-sm tracking-[0.35em] text-white/90 transition duration-300 hover:text-white"
+          >
+            STORIES
+          </Link>
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="text-sm tracking-[0.35em] text-white/90 transition duration-300 hover:text-white"
+          >
+            CONTACT
+          </Link>
+          <Link
+            href="/booking"
+            onClick={() => setMenuOpen(false)}
+            className="rounded-full border border-white/30 bg-white/10 px-6 py-3 text-xs tracking-[0.35em] text-white backdrop-blur-xl transition duration-300 hover:bg-white hover:text-black"
+          >
+            BOOK
+          </Link>
+        </nav>
+      )}
     </header>
-  );  
+  );
 }
